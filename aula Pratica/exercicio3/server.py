@@ -7,11 +7,12 @@ def conecao(conecao,client):
 	while(msg != "sair"):
 		print(str(client) + " : " + str(msg))
 		msg = conecao.recv(1024).decode("utf-8")
+		#conecao.send("Recebi uma mensagem".encode("utf-8"))
 	conecao.close()
 	
 
 host = 'localhost'
-port = 2405
+port = 2406
 
 tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 origi = (host,port)
@@ -19,10 +20,11 @@ origi = (host,port)
 tcp.bind(origi)
 tcp.listen(1)
 print (origi)
+
 while (True):
 	con, client = tcp.accept()
-	#threading._start_new_thread(conecao, (con,client))
-	conecao(con,client)
+	con.send(1111)
+	threading._start_new_thread(conecao, (con,client))
 
 tcp.close() 
 
